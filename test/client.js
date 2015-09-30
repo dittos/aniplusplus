@@ -3,18 +3,20 @@ import {expect} from 'chai';
 import {describe, it} from 'mocha';
 import sinon from 'sinon';
 import * as Client from '../client';
-import http from '../http';
+
+import _fetch from 'node-fetch';
+global.fetch = _fetch;
 
 const fixtureDir = __dirname + '/fixtures';
 
 describe('Client', () => {
-    it('should load vod update list', async function() {
+    it('should load vod update list', async() => {
         const fixtureData = readFileSync(fixtureDir + '/vodUpdateList.html');
-        sinon.stub(http, 'fetch')
+        sinon.stub(global, 'fetch')
             .returns(Promise.resolve({text: () => Promise.resolve(fixtureData)}));
         const date = '2015-09-30';
         const items = await Client.getVodUpdateList(date);
-        expect(http.fetch.args[0][0]).to.equal('http://m.aniplustv.com/vodUpdateList.asp?curDate=2015-09-30');
+        expect(fetch.args[0][0]).to.equal('http://m.aniplustv.com/vodUpdateList.asp?curDate=2015-09-30');
         expect(items).to.deep.equal({
             date: date,
             items: [

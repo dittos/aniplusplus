@@ -1,22 +1,25 @@
 import {parse as parseUrl} from 'url';
 import cheerio from 'cheerio';
-import http from './http';
+
+async function loadFromUrl(url) {
+    return cheerio.load(await fetch(url).then(r => r.text()));
+}
 
 export async function getVodUpdateList(date) {
     const url = `http://m.aniplustv.com/vodUpdateList.asp?curDate=${date}`;
-    const $ = cheerio.load(await (await http.fetch(url)).text());
-    const items = $('#timeList').find('li').map(function() {
-        const href = $(this).find('a').attr('href');
+    const $ = await loadFromUrl(url);
+    const items = $('#timeList').find('li').get().map(item => {
+        const href = $(item).find('a').attr('href');
         const parseQueryString = true;
         const parsed = parseUrl(href, parseQueryString);
         return {
             contentSerial: parsed.query.contentSerial,
             part: parsed.query.part,
-            title: $(this).find('.title').text(),
-            chapter: $(this).find('.chapter').text(),
-            pic: $(this).find('.pic img').attr('src'),
+            title: $(item).find('.title').text(),
+            chapter: $(item).find('.chapter').text(),
+            pic: $(item).find('.pic img').attr('src'),
         };
-    }).get();
+    });
     return {
         date,
         items
