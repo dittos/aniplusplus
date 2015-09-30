@@ -1,0 +1,162 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>ANIPLUS</title>
+<link type="text/css" href="/css/layout.css" rel="stylesheet">
+<link type="text/css" href="/css/style.css" rel="stylesheet">
+<link type="text/css" href="/css/jquery.mobile-1.2.0.css" rel="stylesheet">
+
+<link rel = "apple-touch-icon" href = "/img/icon.png" />
+<link rel = "shortcut icon" href="/img/icon.ico" />
+
+<script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+<script language="javascript" src="http://xpay.lgdacom.net/xpay/js/xpay_crossplatform.js" type="text/javascript"></script>
+<script type = "text/javascript" src = "/js/mj.viewport.js"></script>
+<script type = "text/javascript" src = "/js/function.js"></script>
+<script type = "text/javascript">
+    function update(scale) {
+        document.getElementById("useragent").textContent = navigator.userAgent;
+        document.getElementById("scale").textContent = scale || "none";
+        if (mj.viewport.isIos()) {
+            document.getElementById("device").textContent = "iOS";
+        } else if (mj.viewport.isAndroid()) {
+            document.getElementById("device").textContent = "Android";
+        } else if (mj.viewport.isPCBrowser()) {
+            document.getElementById("device").textContent = "PC";
+        }
+
+    }
+
+    mj.viewport({ width: 640, onAdjustment: update });
+
+    if (mj.viewport.isIos()) {
+        window.addEventListener('load', function () { update(null); });
+    }
+</script>
+<script type="text/javascript" src="/js/jquery.mobile-1.2.0.js"></script>
+
+
+</head>
+<body>
+<div data-role = "page" id = "vodUpdateList" class="wrap">
+	<div id="header">
+	<h1><a href="/default.asp"><img src="/img/logo.png" alt="ANIPLUS" /></a></h1>
+	<div class="loginTop"><a href="/login.asp"><img src="/img/btn_login.png" alt="login" /></a></div>
+</div>
+	<!--//#header -->
+   <input type = "hidden" id = "curDate" value = "2015-09-30" />
+   <input type = "hidden" id = "preDate1" value = "2015-09-29" />
+   <input type = "hidden" id = "nextDate1" value = "2015-10-01" />
+	<div id="contents">
+		<div class="subHeader">
+			<div class="inner">
+				<span class="flag"><a href="/paymentInfo.asp" title="이용권구매"></a></span>
+				<h2>업데이트</h2>
+				<p class="btnMenu"><a href="/menu.asp"><img src="/img/btnMenu.png" alt="MENU" /></a></p>
+			</div>
+		</div>
+		<!-- //subHeader -->
+		
+		
+		<div class="tabBtnArea bk2">
+			<div class="dateArea">
+				<div class="preDate" pval = "2015-09-29">
+					<a>
+						<span><img src="/img/2.png" alt="0" /></span>
+						<span><img src="/img/9.png" alt="1" /></span>
+					</a>
+				</div>
+				
+				<div class="ymd">
+					<span><img src="/img/BIG_W_2.png" alt="2" /></span>
+					<span><img src="/img/BIG_W_0.png" alt="0" /></span>
+					<span><img src="/img/BIG_W_1.png" alt="1" /></span>
+					<span class="y"><img src="/img/BIG_W_5.png" alt="2" /></span>
+					<span><img src="/img/BIG_W_0.png" alt="1" /></span>
+					<span class="m"><img src="/img/BIG_W_9.png" alt="2" /></span>
+					<span><img src="/img/BIG_Y_3.png" alt="0" /></span>
+					<span><img src="/img/BIG_Y_0.png" alt="2" /></span>
+				</div>
+				
+				<div class="nextDate" id = "nextDate" pval = "2015-10-01">
+					<a>
+						<span><img src="/img/0.png" alt="0" /></span>
+						<span><img src="/img/1.png" alt="3" /></span>
+					</a>
+				</div>
+			</div>
+			<!-- //dateArea  -->
+		
+			<!--<div class="searchForm">
+				<span><input type="text" value="검색어를 입력하여 주세요" /><label>검색어를 입력하여 주세요</label></span>
+				<a class="btnSearch" /></a>
+			</div>-->
+		</div>
+		<!-- //tabBtnArea -->
+
+		<ul class="programList" id = "timeList" data-role="listview">
+			
+            <li>
+				<a href="/vodDetail.asp?contentSerial=1578&part=23&referUrl=%2FvodUpdateList%2Easp%3FcurDate%3D2015%2D09%2D30">
+					<div class="pic"><img src="http://www.tvee.co.kr/images/tvee-admin/content/M_20150123150559.jpg" style = "width:145px;height:82px" alt="" /></div>
+					<div class="txt">
+						<span class="title">아이돌 마스터 신데렐라 걸즈</span>
+						<span class="chapter">23화 Glass Slippers</span>
+					</div>
+				</a>
+			</li>
+            
+            <li>
+				<a href="/vodDetail.asp?contentSerial=1649&part=10&referUrl=%2FvodUpdateList%2Easp%3FcurDate%3D2015%2D09%2D30">
+					<div class="pic"><img src="http://www.tvee.co.kr/images/tvee-admin/content/M_20150727121819.jpg" style = "width:145px;height:82px" alt="" /></div>
+					<div class="txt">
+						<span class="title">프리즈마 이리야 2wei Herz!</span>
+						<span class="chapter">10화 세상의 한편에서 너의 이름을</span>
+					</div>
+				</a>
+			</li>
+            
+            <li>
+				<a href="/vodDetail.asp?contentSerial=1648&part=13&referUrl=%2FvodUpdateList%2Easp%3FcurDate%3D2015%2D09%2D30">
+					<div class="pic"><img src="http://www.tvee.co.kr/images/tvee-admin/content/M_20150706161157.jpg" style = "width:145px;height:82px" alt="" /></div>
+					<div class="txt">
+						<span class="title">GOD EATER</span>
+						<span class="chapter">9화 소마 시크잘</span>
+					</div>
+				</a>
+			</li>
+            
+            <li>
+				<a href="/vodDetail.asp?contentSerial=1647&part=13&referUrl=%2FvodUpdateList%2Easp%3FcurDate%3D2015%2D09%2D30">
+					<div class="pic"><img src="http://www.tvee.co.kr/images/tvee-admin/content/M_20150721153827.jpg" style = "width:145px;height:82px" alt="" /></div>
+					<div class="txt">
+						<span class="title">WORKING!!! 3기</span>
+						<span class="chapter">13화 마히루의 결투</span>
+					</div>
+				</a>
+			</li>
+            
+			
+			<!--<li class="viewMore"><a href="#"><span>더보기</span></a></li>-->
+		</ul>
+		<!-- //programList -->
+		
+		<div class="category" data-role="footer" data-position="fixed">
+			<ul>
+				<li><a href="/liveOnAir.asp"><img src="/img/btn3Cate01.jpg" alt="LIVE" /></a></li>
+				<li><a href="/liveTimeLine.asp"><img src="/img/btn3Cate02.jpg" alt="편성표" /></a></li>
+				<li><a href="/vodList.asp"><img src="/img/btn3Cate03.jpg" alt="VOD" /></a></li>
+				<li><a href="/vodUpdateList.asp"><img src="/img/btn3Cate04_on.jpg" alt="업데이트" /></a></li>
+				<li><a href="/paymentInfo.asp"><img src="/img/btn3Cate05.jpg" alt="결제안내" /></a></li>
+			</ul>
+		</div>
+		<!-- //category -->
+	</div>
+	<!-- //#contents -->
+</div>
+</body>
+</html>
