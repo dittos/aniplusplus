@@ -1,6 +1,6 @@
 import {readFileSync} from 'fs';
 import {expect} from 'chai';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import sinon from 'sinon';
 import * as Client from '../client';
 
@@ -10,14 +10,24 @@ global.fetch = _fetch;
 const fixtureDir = __dirname + '/fixtures';
 
 describe('Client', () => {
+    var fakes;
+
+    beforeEach(() => {
+        fakes = sinon.collection;
+    });
+
+    afterEach(() => {
+        fakes.restore();
+    });
+
     it('should load vod update list', async() => {
         const fixtureData = readFileSync(fixtureDir + '/vodUpdateList.html');
-        sinon.stub(global, 'fetch')
+        fakes.stub(global, 'fetch')
             .returns(Promise.resolve({text: () => Promise.resolve(fixtureData)}));
         const date = '2015-09-30';
-        const items = await Client.getVodUpdateList(date);
+        const result = await Client.getVodUpdateList(date);
         expect(fetch.args[0][0]).to.equal('http://m.aniplustv.com/vodUpdateList.asp?curDate=2015-09-30');
-        expect(items).to.deep.equal({
+        expect(result).to.deep.equal({
             date: date,
             items: [
                 {
@@ -49,6 +59,18 @@ describe('Client', () => {
                     pic: "http://www.tvee.co.kr/images/tvee-admin/content/M_20150721153827.jpg",
                 },
             ]
+        });
+    });
+
+    it('should load empty vod update list', async() => {
+        const fixtureData = readFileSync(fixtureDir + '/vodUpdateList_noitem.html');
+        fakes.stub(global, 'fetch')
+            .returns(Promise.resolve({text: () => Promise.resolve(fixtureData)}));
+        const date = '2015-09-27';
+        const result = await Client.getVodUpdateList(date);
+        expect(result).to.deep.equal({
+            date: date,
+            items: []
         });
     });
 });

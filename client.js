@@ -8,18 +8,23 @@ async function loadFromUrl(url) {
 export async function getVodUpdateList(date) {
     const url = `http://m.aniplustv.com/vodUpdateList.asp?curDate=${date}`;
     const $ = await loadFromUrl(url);
-    const items = $('#timeList').find('li').get().map(item => {
-        const href = $(item).find('a').attr('href');
-        const parseQueryString = true;
-        const parsed = parseUrl(href, parseQueryString);
-        return {
-            contentSerial: parsed.query.contentSerial,
-            part: parsed.query.part,
-            title: $(item).find('.title').text(),
-            chapter: $(item).find('.chapter').text(),
-            pic: $(item).find('.pic img').attr('src'),
-        };
-    });
+    const itemElements = $('#timeList').find('li').get();
+    var items = [];
+    if (itemElements.length > 0 &&
+            $(itemElements[0]).find('a').attr('href') !== '#') {
+        items = itemElements.map(item => {
+            const href = $(item).find('a').attr('href');
+            const parseQueryString = true;
+            const parsed = parseUrl(href, parseQueryString);
+            return {
+                contentSerial: parsed.query.contentSerial,
+                part: parsed.query.part,
+                title: $(item).find('.title').text(),
+                chapter: $(item).find('.chapter').text(),
+                pic: $(item).find('.pic img').attr('src'),
+            };
+        });
+    }
     return {
         date,
         items
